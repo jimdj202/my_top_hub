@@ -6,9 +6,9 @@ import (
 
 )
 
-var(
-	SpiderNames []string
-)
+var Server struct {
+	DBUrl string
+}
 
 func init() {
 	pwd,_ := os.Getwd()
