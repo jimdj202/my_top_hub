@@ -13,8 +13,9 @@ type DB struct {
 
 var MyDB *DB
 
-func InitDB(url string){
+func InitDB(url string) *DB{
 	MyDB = NewClient(url)
+	return MyDB
 }
 
 func NewClient(url string) *DB{
