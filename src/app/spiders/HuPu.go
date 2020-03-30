@@ -2,15 +2,16 @@ package spiders
 
 import (
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 	"hub/src/app/db/model"
 	"io"
 	"net/http"
 	"time"
 )
 
-func(s *Sipder) GetHuPu() *[]model.Item{
+func(s *Sipder) GetHuPu() []model.Item{
 	fmt.Println("Spider run:", "HuPu")
-	items := &[]model.Item{}
+	var items []model.Item
 	url := "https://bbs.hupu.com/all-gambia"
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -35,19 +36,32 @@ func(s *Sipder) GetHuPu() *[]model.Item{
 	defer res.Body.Close()
 	//str,_ := ioutil.ReadAll(res.Body)
 	//fmt.Println(string(str))
-	var allData []map[string]interface{}
+
 	document, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
-		fmt.Println("抓取" + spider.DataType + "失败")
-		return []map[string]interface{}{}
+		fmt.Println("抓取" + s.Name + "失败")
+		return items
 	}
 	document.Find(".bbsHotPit li").Each(func(i int, selection *goquery.Selection) {
 		s := selection.Find(".textSpan a")
 		url, boolUrl := s.Attr("href")
 		text := s.Text()
 		if boolUrl {
-			allData = append(allData, map[string]interface{}{"title": text, "url": "https://bbs.hupu.com/" + url})
+			oneLine := model.Item{
+				Title:      text,
+				Url:        "https://bbs.hupu.com/" + url,
+				ImageUrl:   "",
+				TypeDomain: "虎扑",
+				TypeFilter: "",
+				CommentNum: 0,
+				Date:       time.Time{},
+				CreatedAt:  time.Time{},
+				UpdatedAt:  time.Time{},
+				DeletedAt:  nil,
+			}
+			//items = append(items, map[string]interface{}{"title": text, "url": "https://bbs.hupu.com/" + url})
+			items = append(items, oneLine)
 		}
 	})
-	return allData
+	return items
 }

@@ -1,6 +1,8 @@
 package model
 
 import (
+	"github.com/jinzhu/gorm"
+	"hub/src/app/db"
 	"time"
 )
 
@@ -16,4 +18,8 @@ type Item struct{
 	CreatedAt time.Time `gorm:"index"`
 	UpdatedAt time.Time `gorm:"default:current_time"`
 	DeletedAt *time.Time
+}
+
+func (i *Item)Save() *gorm.DB{
+	return db.GetMyDB().GetGormDB().Create(i)
 }

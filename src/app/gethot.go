@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"hub/src/app/db"
+	"hub/src/app/db/model"
 	"hub/src/app/spiders"
 	"io/ioutil"
 	"log"
@@ -23,8 +25,8 @@ var(
 )
 
 func main(){
-	//myDB := db.NewClient("tophub:hWZpDMhBsRMWHDWc@tcp(192.168.176.128:3306)/tophub?charset=utf8&parseTime=True&loc=Local")
-	//defer myDB.Close()
+	myDB := db.NewClient("tophub:hWZpDMhBsRMWHDWc@tcp(192.168.176.128:3306)/tophub?charset=utf8&parseTime=True&loc=Local")
+	defer myDB.Close()
 
 	pwd,_ := os.Getwd()
 	pwd = pwd + "/spiders"
@@ -53,7 +55,15 @@ func main(){
 		dataType := reflectValue.MethodByName("Get" + funcName)
 		data := dataType.Call(nil)
 		fmt.Printf("%T",data)
+		//fmt.Println(data[0].Type(),data[0].Kind(),data[0].CanInterface())
+		originData := data[0].Interface().([]model.Item)
+		fmt.Println(originData)
+		//items := []model.Item{}
+		for _,v := range originData{
+			(&v).Save()
+		}
 	}
+
 }
 
 func init(){
