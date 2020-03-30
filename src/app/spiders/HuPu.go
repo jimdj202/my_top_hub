@@ -45,6 +45,8 @@ func(s *Sipder) GetHuPu() []model.Item{
 	document.Find(".bbsHotPit li").Each(func(i int, selection *goquery.Selection) {
 		s := selection.Find(".textSpan a")
 		url, boolUrl := s.Attr("href")
+		common := selection.Find(("em")).Text()
+		fmt.Println(common)
 		text := s.Text()
 		if boolUrl {
 			oneLine := model.Item{
