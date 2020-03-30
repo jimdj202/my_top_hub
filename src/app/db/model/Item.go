@@ -12,8 +12,8 @@ type Item struct{
 	TypeDomain string `gorm:type:varchar(20)`
 	TypeFilter string `gorm:type:varchar(20)`
 	CommentNum int16
-	Date     *time.Time `gorm:"index"`
+	Date     time.Time `gorm:"index"`
 	CreatedAt time.Time `gorm:"index"`
-	UpdatedAt time.Time
-	DeletedAt *time.Time `gorm:"index"`
+	UpdatedAt time.Time `gorm:"default:current_time"`
+	DeletedAt *time.Time
 }
