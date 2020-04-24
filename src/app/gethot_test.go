@@ -3,6 +3,7 @@ package main
 import (
 	"container/list"
 	"fmt"
+	"hub/src/app/db/model"
 	"hub/src/app/spiders"
 	"io/ioutil"
 	"log"
@@ -44,5 +45,12 @@ func Test_Init(t *testing.T) {
 		data := dataType.Call(nil)
 		fmt.Printf("%T",data)
 	}
+
+}
+
+func Test_Migrate(t *testing.T)  {
+		db1 := NewClient("tophub:hWZpDMhBsRMWHDWc@tcp(192.168.176.128:3306)/tophub?charset=utf8&parseTime=True&loc=Local")
+		db1.GetGormDB().AutoMigrate(&model.Item{})
+		fmt.Println(db1)
 
 }
