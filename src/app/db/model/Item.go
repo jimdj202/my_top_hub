@@ -7,15 +7,15 @@ import (
 )
 
 type Item struct{
-	ID	uint32 `gorm:"type:BIGINT AUTO_INCREMENT;"`
-	Title string `gorm:type:varchar(100)`
-	Url string `gorm:primary_key;type:varchar(200)`
-	ImageUrl string `gorm:type:varchar(200)`
-	TypeDomain string `gorm:type:varchar(20)`
-	TypeFilter string `gorm:type:varchar(20)`
-	CommentNum int16
-	Date     time.Time `gorm:"index"`
-	CreatedAt time.Time `gorm:"index"`
+	//ID	uint32 `gorm:"type:BIGINT"`
+	Title string `gorm:"type:varchar(100)"`
+	Url string `gorm:"type:varchar(200);primary_key"`
+	ImageUrl string `gorm:"type:varchar(200)"`
+	TypeDomain string `gorm:"type:varchar(20)"`
+	TypeFilter string `gorm:"type:varchar(20)"`
+	CommentNum int16 `gorm:"type:BIGINT"`
+	//Date     time.Time `sql:"index"`
+	CreatedAt time.Time `sql:"index"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP"`
 	DeletedAt *time.Time
 }

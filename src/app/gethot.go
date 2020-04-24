@@ -48,7 +48,7 @@ func main(){
 			SpiderNames = append(SpiderNames,fileName)
 		}
 	}
-
+	SpiderNames = []string{"WeiBo"}
 	for _,funcName := range SpiderNames {
 		reflectValue := reflect.ValueOf(&spiders.Sipder{Name:funcName})
 		//reflectValueEle := reflectValue.Elem()
@@ -57,7 +57,7 @@ func main(){
 		fmt.Printf("%T",data)
 		//fmt.Println(data[0].Type(),data[0].Kind(),data[0].CanInterface())
 		originData := data[0].Interface().([]model.Item)
-		fmt.Println(originData)
+		//fmt.Println(originData)
 		//items := []model.Item{}
 		for _,v := range originData{
 			(&v).Save()
