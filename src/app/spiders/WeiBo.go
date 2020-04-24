@@ -6,6 +6,7 @@ import (
 	"hub/src/app/db/model"
 	"io"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -43,6 +44,7 @@ func(s *Sipder) GetWeiBo() []model.Item{
 	document.Find(".list_a li").Each(func(i int, selection *goquery.Selection) {
 		url, boolUrl := selection.Find("a").Attr("href")
 		text := selection.Find("a span").Text()
+		comNum,_:= strconv.Atoi(selection.Find("span").Text())
 		textLock := selection.Find("a em").Text()
 		text = strings.Replace(text, textLock, "", -1)
 		if boolUrl {
@@ -52,8 +54,8 @@ func(s *Sipder) GetWeiBo() []model.Item{
 				ImageUrl:   "",
 				TypeDomain: "微博",
 				TypeFilter: "",
-				CommentNum: 0,
-				Date:       time.Time{},
+				CommentNum: comNum,
+				//Date:       time.Time{},
 				CreatedAt:  time.Time{},
 				UpdatedAt:  time.Time{},
 				DeletedAt:  nil,

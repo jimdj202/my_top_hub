@@ -13,7 +13,7 @@ type Item struct{
 	ImageUrl string `gorm:"type:varchar(200)"`
 	TypeDomain string `gorm:"type:varchar(20)"`
 	TypeFilter string `gorm:"type:varchar(20)"`
-	CommentNum int16 `gorm:"type:BIGINT"`
+	CommentNum int `gorm:"type:BIGINT"`
 	//Date     time.Time `sql:"index"`
 	CreatedAt time.Time `sql:"index"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP"`

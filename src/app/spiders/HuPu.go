@@ -56,7 +56,7 @@ func(s *Sipder) GetHuPu() []model.Item{
 				TypeDomain: "虎扑",
 				TypeFilter: "",
 				CommentNum: 0,
-				Date:       time.Time{},
+				//Date:       time.Time{},
 				CreatedAt:  time.Time{},
 				UpdatedAt:  time.Time{},
 				DeletedAt:  nil,
