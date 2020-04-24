@@ -40,7 +40,7 @@ func Test_Init(t *testing.T) {
 
 	for i := SpiderNames.Front(); i != nil; i = i.Next() {
 		fmt.Println(i.Value)
-		reflectValue := reflect.ValueOf(spiders.Sipder{})
+		reflectValue := reflect.ValueOf(spiders.Spider{})
 		dataType := reflectValue.MethodByName("Get" + i.Value.(string))
 		data := dataType.Call(nil)
 		fmt.Printf("%T",data)

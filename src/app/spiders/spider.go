@@ -1,6 +1,6 @@
 package spiders
 
-type Sipder struct {
+type Spider struct {
 	Name string
 }
 

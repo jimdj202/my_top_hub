@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func(s *Sipder) GetHuPu() []model.Item{
+func(s *Spider) GetHuPu() []model.Item{
 	fmt.Println("Spider run:", "HuPu")
 	var items []model.Item
 	url := "https://bbs.hupu.com/all-gambia"

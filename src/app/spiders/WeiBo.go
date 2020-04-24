@@ -11,7 +11,7 @@ import (
 	"time"
 )
 // 微博
-func(s *Sipder) GetWeiBo() []model.Item{
+func(s *Spider) GetWeiBo() []model.Item{
 	fmt.Println("Spider run:", "WeiBo")
 	url := "https://s.weibo.com/top/summary"
 	timeout := time.Duration(5 * time.Second) //超时时间5s
