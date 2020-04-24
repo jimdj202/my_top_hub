@@ -25,7 +25,7 @@ func(s *Sipder) GetWeiBo() []model.Item{
 		fmt.Println("抓取" + s.Name + "失败")
 		return items
 	}
-	request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
+	//request.Header.Add("User-Agent", `Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Mobile Safari/537.36`)
 	res, err := client.Do(request)
 
 	if err != nil {
@@ -35,15 +35,17 @@ func(s *Sipder) GetWeiBo() []model.Item{
 	defer res.Body.Close()
 	//str, _ := ioutil.ReadAll(res.Body)
 	//fmt.Println(string(str))
-
+	//b,_:= ioutil.ReadAll(res.Body)
+	//fmt.Println(string(b))
 	document, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
 		fmt.Println("抓取" + s.Name + "失败")
 		return items
 	}
-	document.Find(".list_a li").Each(func(i int, selection *goquery.Selection) {
+
+	document.Find("tbody tr").Each(func(i int, selection *goquery.Selection) {
 		url, boolUrl := selection.Find("a").Attr("href")
-		text := selection.Find("a span").Text()
+		text := selection.Find("a").Text()
 		comNum,_:= strconv.Atoi(selection.Find("span").Text())
 		textLock := selection.Find("a em").Text()
 		text = strings.Replace(text, textLock, "", -1)
