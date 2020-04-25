@@ -15,6 +15,8 @@ type Item struct{
 	TypeDomain string `gorm:"type:varchar(20)"`
 	TypeFilter string `gorm:"type:varchar(20)"`
 	CommentNum int `gorm:"type:BIGINT"`
+	Desc string `gorm:"type:varchar(400)"`
+	Extra string `gorm:"type:varchar(400)"`
 	//Date     time.Time `sql:"index"`
 	CreatedAt time.Time `sql:"index"`
 	UpdatedAt time.Time `gorm:"default:CURRENT_TIMESTAMP"`
