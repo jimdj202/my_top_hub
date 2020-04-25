@@ -49,6 +49,7 @@ func (s *Spider) GetITHome() []model.Item{
 		if boolUrl {
 			//allData = append(allData, map[string]interface{}{"title": text, "url": url})
 			oneLine := model.Item{
+				Index: i,
 				Title:      text,
 				Url:        url,
 				//ImageUrl:   imgUrl,

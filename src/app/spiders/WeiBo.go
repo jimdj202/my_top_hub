@@ -51,6 +51,7 @@ func(s *Spider) GetWeiBo() []model.Item{
 		text = strings.Replace(text, textLock, "", -1)
 		if boolUrl {
 			oneLine := model.Item{
+				Index: i,
 				Title:      text,
 				Url:        "https://s.weibo.com" + url,
 				ImageUrl:   "",

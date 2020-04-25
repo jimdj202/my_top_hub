@@ -48,7 +48,7 @@ func main(){
 			SpiderNames = append(SpiderNames,fileName)
 		}
 	}
-	SpiderNames = []string{"TieBa"}
+	SpiderNames = []string{"HuPu"}
 	for _,funcName := range SpiderNames {
 		reflectValue := reflect.ValueOf(&spiders.Spider{Name: funcName})
 		//reflectValueEle := reflectValue.Elem()

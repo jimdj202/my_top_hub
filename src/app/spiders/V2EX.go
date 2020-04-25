@@ -45,6 +45,7 @@ func (s *Spider) GetV2EX() []model.Item{
 		if boolUrl {
 			//allData = append(allData, map[string]interface{}{"title": text, "url": url})
 			oneLine := model.Item{
+				Index: i,
 				Title:      text,
 				Url:        "https://www.v2ex.com" + url,
 				//ImageUrl:   "",

@@ -63,9 +63,10 @@ func (s *Spider) GetTieBa() []model.Item{
 	//fmt.Println(string(str))
 	err = json.Unmarshal(str, &resData)
 	if err == nil {
-		for _,v := range resData.Data.Bang_topic.Topic_list{
+		for i,v := range resData.Data.Bang_topic.Topic_list{
 
 			oneLine := model.Item{
+				Index: i,
 				Title:      v.Topic_name,
 				Url:        v.Topic_url,
 				ImageUrl:   v.Topic_pic,

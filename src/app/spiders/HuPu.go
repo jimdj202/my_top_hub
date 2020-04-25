@@ -6,6 +6,8 @@ import (
 	"hub/src/app/db/model"
 	"io"
 	"net/http"
+	"regexp"
+	"strconv"
 	"time"
 )
 
@@ -46,16 +48,24 @@ func(s *Spider) GetHuPu() []model.Item{
 		s := selection.Find(".textSpan a")
 		url, boolUrl := s.Attr("href")
 		common := selection.Find(("em")).Text()
-		fmt.Println(common)
+		reg:= regexp.MustCompile("(\\d*)回复")
+		//comNum3 := reg.Find([]byte(common))
+		comNum2 := reg.FindStringSubmatch(common)
+		comNum3 := 0
+		if len(comNum2) > 1 {
+			comNum3, _ = strconv.Atoi(comNum2[1])
+		}
+
 		text := s.Text()
 		if boolUrl {
 			oneLine := model.Item{
+				Index: i,
 				Title:      text,
 				Url:        "https://bbs.hupu.com/" + url,
 				ImageUrl:   "",
 				TypeDomain: "虎扑",
 				TypeFilter: "",
-				CommentNum: 0,
+				CommentNum: comNum3,
 				//Date:       time.Time{},
 				CreatedAt:  time.Time{},
 				UpdatedAt:  time.Time{},

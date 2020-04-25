@@ -68,7 +68,7 @@ func (s *Spider) GetWeiXin() []model.Item{
 	err = json.Unmarshal(str, &resData)
 
 	if err == nil {
-		for _,v := range resData.Data{
+		for i,v := range resData.Data{
 			reg, _ := regexp.Compile("\\d+")
 			var comNum3 int
 			switch v.Read_num.(type) {
@@ -81,6 +81,7 @@ func (s *Spider) GetWeiXin() []model.Item{
 			}
 
 			oneLine := model.Item{
+				Index: i,
 				Title:      "["+v.Account+"]" + v.Title,
 				Url:        v.Url,
 				ImageUrl:   v.Avatar,

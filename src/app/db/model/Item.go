@@ -8,6 +8,7 @@ import (
 
 type Item struct{
 	//ID	uint32 `gorm:"type:BIGINT"`
+	Index int `gorm:"type:SMALLINT"`
 	Title string `gorm:"type:varchar(100)"`
 	Url string `gorm:"type:varchar(200);primary_key"`
 	ImageUrl string `gorm:"type:varchar(200)"`
