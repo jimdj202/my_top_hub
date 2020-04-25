@@ -3,6 +3,8 @@ package model
 import (
 	"fmt"
 	"hub/src/app/db"
+	"regexp"
+	"strconv"
 	"testing"
 )
 
@@ -11,4 +13,11 @@ func Test_AutoMigrate(t *testing.T) {
 	db1.GetGormDB().AutoMigrate(&Item{})
 	fmt.Println(db1)
 
+}
+
+func Test_Re(t *testing.T){
+	reg, _ := regexp.Compile("\\d+")
+	comNum2 := reg.Find([]byte("10万+"))
+	comNum3, _ := strconv.Atoi(string(comNum2))
+	t.Log(comNum3)
 }
