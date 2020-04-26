@@ -5,7 +5,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"hub/src/app/db/model"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -38,8 +37,8 @@ func (s *Spider) Get36Kr() []model.Item{
 		return items
 	}
 	defer res.Body.Close()
-	str, _ := ioutil.ReadAll(res.Body)
-	fmt.Println(string(str))
+	//str, _ := ioutil.ReadAll(res.Body)
+	//fmt.Println(string(str))
 	document, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
 		fmt.Println("抓取" + s.Name + "失败")
@@ -49,9 +48,8 @@ func (s *Spider) Get36Kr() []model.Item{
 		text := selection.Find("a.article-item-title").Text()
 		url, boolUrl := selection.Find(".article-item-description").Attr("href")
 		descText := selection.Find(".article-item-description").Text()
-		imgUrl, _ := selection.Find("img").Attr("src")
+		//imgUrl, _ := selection.Find("img").Attr("src")
 		comNum := selection.Find("span.kr-flow-bar-hot span").Text()
-
 
 		reg, _ := regexp.Compile("\\d+")
 		comNum2 := reg.Find([]byte(comNum))
@@ -64,7 +62,7 @@ func (s *Spider) Get36Kr() []model.Item{
 				Index: i,
 				Title:      text,
 				Url:        url,
-				ImageUrl:   imgUrl,
+				//ImageUrl:   imgUrl,
 				TypeDomain: "36Kr",
 				TypeFilter: "",
 				CommentNum: comNum3 ,
