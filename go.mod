@@ -7,6 +7,7 @@ require (
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang-sql/civil v0.0.0-20190719163853-cb61b32ac6fe
 	github.com/jinzhu/gorm v1.9.12
+	github.com/json-iterator/go v1.1.9
 	golang.org/x/text v0.3.0
 )
 
