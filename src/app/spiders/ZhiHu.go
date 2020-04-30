@@ -8,11 +8,14 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetZhiHu() []model.Item{
-	fmt.Println("Spider run:", "ZhiHu")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.SplitAfter(typeDomainID,"Get")[0]
 	var items []model.Item
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -56,6 +59,7 @@ func (s *Spider) GetZhiHu() []model.Item{
 				Url:        url,
 				ImageUrl:   imgUrl,
 				TypeDomain: "知乎",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum3 * 10000,
 				//Date:       time.Time{},

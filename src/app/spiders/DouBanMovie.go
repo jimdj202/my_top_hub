@@ -7,11 +7,14 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetDouBanMovie() []model.Item{
-	fmt.Println("Spider run:", runFuncName())
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(20 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -51,6 +54,7 @@ func (s *Spider) GetDouBanMovie() []model.Item{
 			Url:        url,
 			ImageUrl:   item.Get("images").Get("large").ToString(),
 			TypeDomain: "DouBanMovie",
+			TypeDomainID: typeDomainID,
 			TypeFilter: "",
 			CommentNum: int(item.Get("rating").Get("average").ToFloat32() *10 ) ,
 			Desc: desc,

@@ -6,11 +6,14 @@ import (
 	"hub/src/app/db/model"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetV2EX() []model.Item{
-	fmt.Println("Spider run:", "V2EX")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -50,6 +53,7 @@ func (s *Spider) GetV2EX() []model.Item{
 				Url:        "https://www.v2ex.com" + url,
 				//ImageUrl:   "",
 				TypeDomain: "V2EX",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				//CommentNum: comNum3 * 10000,
 				//Date:       time.Time{},

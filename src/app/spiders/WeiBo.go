@@ -12,7 +12,9 @@ import (
 )
 // 微博
 func(s *Spider) GetWeiBo() []model.Item{
-	fmt.Println("Spider run:", "WeiBo")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	url := "https://s.weibo.com/top/summary"
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	var items []model.Item
@@ -56,6 +58,7 @@ func(s *Spider) GetWeiBo() []model.Item{
 				Url:        "https://s.weibo.com" + url,
 				ImageUrl:   "",
 				TypeDomain: "微博",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum,
 				//Date:       time.Time{},

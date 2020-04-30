@@ -43,7 +43,9 @@ type ResponseDataTianYa struct {
 }
 
 func (s *Spider) GetTianYa() []model.Item{
-	fmt.Println("Spider run:", "TianYa")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -92,6 +94,7 @@ func (s *Spider) GetTianYa() []model.Item{
 				Url:        v.Url,
 				ImageUrl:   imageUrl,
 				TypeDomain: "天涯",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: num ,
 				Desc: v.Content,

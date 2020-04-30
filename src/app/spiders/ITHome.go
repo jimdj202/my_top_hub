@@ -6,11 +6,14 @@ import (
 	"hub/src/app/db/model"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetITHome() []model.Item{
-	fmt.Println("Spider run:", "ITHome")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -54,6 +57,7 @@ func (s *Spider) GetITHome() []model.Item{
 				Url:        url,
 				//ImageUrl:   imgUrl,
 				TypeDomain: "ITHome",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				//CommentNum: comNum3 * 10000,
 				//Date:       time.Time{},

@@ -13,7 +13,9 @@ import (
 )
 
 func (s *Spider) GetGitHub() []model.Item{
-	fmt.Println("Spider run:", "GitHub")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(20 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -65,6 +67,7 @@ func (s *Spider) GetGitHub() []model.Item{
 				Url:        "https://github.com" + url,
 				//ImageUrl:   imgUrl,
 				TypeDomain: "GitHub",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum3 ,
 				Desc: descText,

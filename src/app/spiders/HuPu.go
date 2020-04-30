@@ -8,11 +8,14 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func(s *Spider) GetHuPu() []model.Item{
-	fmt.Println("Spider run:", "HuPu")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	url := "https://bbs.hupu.com/all-gambia"
 	timeout := time.Duration(5 * time.Second) //超时时间5s
@@ -64,6 +67,7 @@ func(s *Spider) GetHuPu() []model.Item{
 				Url:        "https://bbs.hupu.com/" + url,
 				ImageUrl:   "",
 				TypeDomain: "虎扑",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum3,
 				//Date:       time.Time{},

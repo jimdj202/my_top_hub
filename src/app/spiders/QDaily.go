@@ -8,11 +8,14 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetQDaily() []model.Item{
-	fmt.Println("Spider run:", runFuncName())
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(20 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -65,6 +68,7 @@ func (s *Spider) GetQDaily() []model.Item{
 				Url:        "https://www.qdaily.com/" + url,
 				ImageUrl:   imgUrl,
 				TypeDomain: "QDaily",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum3 ,
 				//Desc: descText,

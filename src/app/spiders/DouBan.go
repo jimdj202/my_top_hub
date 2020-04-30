@@ -8,11 +8,14 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetDouBan() []model.Item{
-	fmt.Println("Spider run:", "DouBan")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -59,6 +62,7 @@ func (s *Spider) GetDouBan() []model.Item{
 				Url:        url,
 				ImageUrl:   imgUrl,
 				TypeDomain: "豆瓣",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum3 ,
 				//Date:       time.Time{},

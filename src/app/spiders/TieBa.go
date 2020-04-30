@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -35,7 +36,9 @@ type ResponseDataTieBa struct {
 }
 
 func (s *Spider) GetTieBa() []model.Item{
-	fmt.Println("Spider run:", "TieBa")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(5 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -71,6 +74,7 @@ func (s *Spider) GetTieBa() []model.Item{
 				Url:        v.Topic_url,
 				ImageUrl:   v.Topic_pic,
 				TypeDomain: "百度贴吧",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: v.Discuss_num,
 				//Date:       time.Time{},

@@ -12,7 +12,9 @@ import (
 )
 
 func (s *Spider) GetHuXiu() []model.Item{
-	fmt.Println("Spider run:", runFuncName())
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(20 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -50,6 +52,7 @@ func (s *Spider) GetHuXiu() []model.Item{
 			Url:        url,
 			ImageUrl:   item.Get("origin_pic_path").ToString(),
 			TypeDomain: "HuXiu",
+			TypeDomainID: typeDomainID,
 			TypeFilter: "",
 			CommentNum: item.Get("count_info").Get("viewnum").ToInt() ,
 			Desc: item.Get("summary").ToString(),

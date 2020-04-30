@@ -8,11 +8,14 @@ import (
 	"net/http"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func (s *Spider) GetBaiDu() []model.Item{
-	fmt.Println("Spider run:", "BaiDu")
+	typeDomainID := runFuncName()
+	fmt.Println("Spider run:", typeDomainID)
+	typeDomainID = strings.Split(typeDomainID,"Get")[1]
 	var items []model.Item
 	timeout := time.Duration(20 * time.Second) //超时时间5s
 	client := &http.Client{
@@ -65,6 +68,7 @@ func (s *Spider) GetBaiDu() []model.Item{
 				Url:        url,
 				//ImageUrl:   imgUrl,
 				TypeDomain: "百度",
+				TypeDomainID: typeDomainID,
 				TypeFilter: "",
 				CommentNum: comNum3 ,
 				//Desc: descText,
