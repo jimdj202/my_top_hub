@@ -7,6 +7,8 @@ import (
 	"golang.org/x/text/transform"
 	"io/ioutil"
 	"runtime"
+	"strconv"
+	"strings"
 )
 
 var decoder = unicode.UTF16(unicode.LittleEndian, unicode.IgnoreBOM).NewDecoder()
@@ -30,6 +32,14 @@ func GbkToUtf8(s []byte) ([]byte, error) {
 func U16toU8(data []byte) []byte{
 	str, _ := decoder.Bytes(data)
 	return str
+}
+
+func UnescapeUnicode(raw []byte) ([]byte, error) {
+	str, err := strconv.Unquote(strings.Replace(strconv.Quote(string(raw)), `\\u`, `\u`, -1))
+	if err != nil {
+		return nil, err
+	}
+	return []byte(str), nil
 }
 
 // 获取正在运行的函数名
